@@ -20,3 +20,4 @@ Run `go get github.com/TriAnMan/alltoolstest/...` and `go build github.com/TriAn
 ## Possible future improvements
 1. Use some REST API framework with a SWAGGER docs generator.
 2. Improve godoc.
+3. Cover REST API methods with functional tests.
