@@ -3,18 +3,23 @@ package bst
 
 import (
 	rbt "github.com/emirpasic/gods/trees/redblacktree"
+	"github.com/sirupsen/logrus"
 	"sync"
 )
 
-type bst struct {
+type Bst struct {
 	tree *rbt.Tree
 	mx   sync.RWMutex
+	log  logrus.FieldLogger
 }
 
-func New(values []int) *bst {
-	t := &bst{
+func New(log logrus.FieldLogger, values []int) *Bst {
+	log.WithField("subsystem", "bst").WithField("action", "create").Debug(values)
+
+	t := &Bst{
 		tree: rbt.NewWithIntComparator(),
 		mx:   sync.RWMutex{},
+		log:  log,
 	}
 
 	for _, value := range values {
@@ -24,21 +29,27 @@ func New(values []int) *bst {
 	return t
 }
 
-func (t *bst) Put(value int) {
+func (t *Bst) Put(value int) {
+	t.log.WithField("subsystem", "bst").WithField("action", "put").Debug(value)
+
 	t.mx.Lock()
 	defer t.mx.Unlock()
 
 	t.tree.Put(value, struct{}{})
 }
 
-func (t *bst) Del(value int) {
+func (t *Bst) Del(value int) {
+	t.log.WithField("subsystem", "bst").WithField("action", "del").Debug(value)
+
 	t.mx.Lock()
 	defer t.mx.Unlock()
 
 	t.tree.Remove(value)
 }
 
-func (t *bst) Has(value int) bool {
+func (t *Bst) Has(value int) bool {
+	t.log.WithField("subsystem", "bst").WithField("action", "has").Debug(value)
+
 	t.mx.RLock()
 	defer t.mx.RUnlock()
 
