@@ -7,7 +7,9 @@ Install [Golang 1.12](https://golang.org/doc/install) or higher.
 Run `go get github.com/TriAnMan/alltoolstest/...` and `go build github.com/TriAnMan/alltoolstest/cmd/bst-server`
 
 ## Run
-`./bst-server -init-file="./init.sample.json"`
+Download `https://github.com/TriAnMan/alltoolstest/blob/master/init.sample.json` into your working directory.
+
+Run `./bst-server -init-file="./init.sample.json"`
 
 ## Design decisions
 1. Use Red-Black Tree as of BST to achieve O(log n) time for a search operation (no need to rebalance a tree).
